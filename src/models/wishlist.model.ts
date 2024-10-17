@@ -14,7 +14,8 @@ const wishlistSchema = new Schema<Wishlist>(
         author: String,
         bookImage: String,
         price: Number,
-        quantity: Number
+        quantity: Number,
+        totalPrice: Number
       }
     ],
     totalPrice: {
@@ -28,9 +29,14 @@ const wishlistSchema = new Schema<Wishlist>(
 );
 
 wishlistSchema.pre('save', function () {
-  this.totalPrice = Math.abs(
-    this.wishlist.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+  this.wishlist.reduce(
+    (acc, curr) =>
+      (curr.totalPrice = Math.abs(acc + curr.quantity * curr.price)),
+    0
   );
+  // this.totalPrice = Math.abs(
+  //   this.wishlist.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+  // );
 });
 
 export default model<Wishlist>('Wishlist', wishlistSchema);

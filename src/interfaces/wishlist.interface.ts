@@ -10,6 +10,7 @@ export interface Wishlist extends Document {
       bookImage: string;
       price: number;
       quantity: number;
+      totalPrice?: number;
     }
   ];
 

@@ -12,11 +12,12 @@ class SummaryRoutes {
 
   private routes = () => {
     // this.router.get('/', this.SummaryController.);
-    this.router.get(
+    this.router.post(
       '/addSummary/:id',
       userAuth,
       this.SummaryController.createSummary
     );
+    this.router.get('/getSummary', this.SummaryController.getSummaryDetails);
   };
 
   public summaryRoutes = (): IRouter => {

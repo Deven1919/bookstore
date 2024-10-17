@@ -26,11 +26,6 @@ const userDetailsSchema = new Schema<Customer>(
   }
 );
 
-// cartSchema.pre('save', function () {
-//   this.totalPrice = this.book.reduce(
-//     (acc, curr) => acc + curr.price * curr.quantity,
-//     0
-//   );
-// });
+
 
 export default model<Customer>('userDetails', userDetailsSchema);

@@ -1,14 +1,13 @@
 import { Cart } from '../interfaces/cart.interface';
 import cartModel from '../models/cart.model';
 import Book from '../models/books.model';
-import { Query } from 'mongoose';
+// import { Query } from 'mongoose';
 
 class CartService {
   public Createcart = async (id: string, body): Promise<any> => {
     const bookDetails = await Book.findById(id);
     const { bookName, author } = bookDetails;
-    let { _id } = body.user;
-    console.log(_id);
+    let { _id } = body;
 
     const cart = await cartModel.findOne().select('+book');
     //       'book.author': bookDetails.author || bookDetails.bookName
@@ -32,7 +31,7 @@ class CartService {
             curr.quantity++;
           }
         });
-        existingBook.markModified('book');
+        await existingBook.markModified('book');
         return await existingBook.save();
         // return await existingBook.save();
       } else {
@@ -56,7 +55,7 @@ class CartService {
   public removeBookFromCart = async (body, id: string): Promise<any> => {
     let { _id } = body.user;
     // get the cart of user
-
+    // console.log(body);
     const findBook = await cartModel
       .findOne({ user_id: _id })
       .select('+book +_id');
@@ -97,5 +96,22 @@ class CartService {
 
     return book;
   };
+  public removeBook = async (body,id:string): Promise<any> => {
+    console.log('removing details from cart');
+     console.log(body)
+  let { _id } = body.user;
+ 
+  const findBook = await cartModel
+    .findOne({ user_id: _id })
+    .select('+book +_id');
+   const updatedvalue=  await findBook.update(
+       {
+         // _id: findBook._id,
+         $pull: { book: { _id: id } }
+       },
+       { multi: true }
+     );
+   return updatedvalue
+   };
 }
 export default CartService;

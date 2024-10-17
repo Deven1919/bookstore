@@ -29,28 +29,29 @@ class SummaryController {
       next(error);
     }
   };
-  //   /**
-  //    * Controller to get a cartDetails
-  //    * @param  {object} Request - request object
-  //    * @param {object} Response - response object
-  //    * @param {Function} NextFunction
-  //    */
-  //   public getSummary = async (
-  //     req: Request,
-  //     res: Response,
-  //     next: NextFunction
-  //   ): Promise<any> => {
-  //     try {
-  //       const data = await this.Summary.getCart();
-  //       res.status(HttpStatus.OK).json({
-  //         code: HttpStatus.OK,
-  //         data: data,
-  //         message: 'cartDetails fetch successfully..'
-  //       });
-  //     } catch (error) {
-  //       next(error);
-  //     }
-  //   };
+  /////////////////
+  /**
+   * Controller to create orderSummary
+   * @param  {object} Request - request object
+   * @param {object} Response - response object
+   * @param {Function} NextFunction
+   */
+  public getSummaryDetails = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.Summary.getSummary();
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'SummaryDetails fetch successfully'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default SummaryController;

@@ -9,7 +9,7 @@ const userSchema = new Schema<IUser>(
     fullname: {
       type: String,
       required: [true, 'First name is required'],
-      maxLength: 8,
+
       unique: true
     },
     lastName: {

@@ -138,6 +138,7 @@ class UserController {
       res.status(HttpStatus.OK).json({
         code: HttpStatus.OK,
         token: data.token,
+        user: data,
         message: 'login successfully'
       });
     } catch (error) {

@@ -19,7 +19,7 @@ class CartController {
     next: NextFunction
   ): Promise<any> => {
     try {
-      const data = await this.CartService.Createcart(req.params.id, res.locals);
+      const data = await this.CartService.Createcart(req.params.id, req.body);
       res.status(HttpStatus.OK).json({
         code: HttpStatus.OK,
         data: data,
@@ -72,6 +72,29 @@ class CartController {
         code: HttpStatus.OK,
         data: data,
         message: 'Book remove from cart successfully..'
+      });
+    } catch (error) {
+      next(error);
+    }
+  };
+  ///////////////////////////
+  /**
+   * Controller to get a cartDetails
+   * @param  {object} Request - request object
+   * @param {object} Response - response object
+   * @param {Function} NextFunction
+   */
+  public removeBook = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<any> => {
+    try {
+      const data = await this.CartService.removeBook(res.locals, req.params.id);
+      res.status(HttpStatus.OK).json({
+        code: HttpStatus.OK,
+        data: data,
+        message: 'Book remove from cart ..'
       });
     } catch (error) {
       next(error);

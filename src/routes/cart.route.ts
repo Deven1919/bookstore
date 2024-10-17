@@ -24,10 +24,15 @@ class CartRoutes {
     this.router.get('/getCart', this.CartController.getCart);
 
     // remove book from cart
-    this.router.get(
+    this.router.post(
       '/removeBook/:id',
       userAuth,
       this.CartController.removeBookFromCart
+    );
+    this.router.patch(
+      '/deleteBook/:id',
+      userAuth,
+      this.CartController.removeBook
     );
   };
 

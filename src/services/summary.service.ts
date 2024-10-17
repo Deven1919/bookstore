@@ -26,8 +26,13 @@ class OrderSummary {
       price
     });
 
-    console.log(ordersummary);
+    // console.log(ordersummary);
     return ordersummary;
+  };
+
+  public getSummary = async () => {
+    const summary = orderSummary.find();
+    return summary;
   };
 }
 export default OrderSummary;

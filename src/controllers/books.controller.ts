@@ -42,7 +42,7 @@ class BookController {
     next: NextFunction
   ): Promise<any> => {
     try {
-      const data = await this.BookService.getSingleBook(req.params._id);
+      const data = await this.BookService.getSingleBook(req.params.id);
       res.status(HttpStatus.OK).json({
         code: HttpStatus.OK,
         data: data,

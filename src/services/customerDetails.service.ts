@@ -1,14 +1,17 @@
 import userDetails from '../models/customerDetails.model';
 import { Customer } from '../interfaces/userDetails.model';
 import { IUser } from '../interfaces/user.interface';
-import e from 'cors';
+
 
 class AddressService {
   //create new address for orders
-  public newCustomerDetails = async (body: Customer): Promise<any> => {
+  public newCustomerDetails = async (body: any): Promise<any> => {
     const {
       address: [{ addressDetails, city, state }]
     } = body;
+    // const { fullName, address, mobileNumber, city, state } = body;
+    console.log(body);
+
     const existingCustomer = await userDetails.findOne().select('+address');
     if (existingCustomer) {
       const chectkAddress = await userDetails
@@ -33,7 +36,7 @@ class AddressService {
       return data;
     }
   };
-  // get customer full details and address details
+  // // // get customer full details and address details
   public getCustomerDetails = async (): Promise<Customer[]> => {
     const customer = await userDetails.find();
     return customer;

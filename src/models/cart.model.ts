@@ -14,7 +14,8 @@ const cartSchema = new Schema<Cart>(
         author: String,
         bookImage: String,
         price: Number,
-        quantity: Number
+        quantity: Number,
+        totalPrice: Number
       }
     ],
     totalPrice: {
@@ -28,10 +29,10 @@ const cartSchema = new Schema<Cart>(
 );
 
 cartSchema.pre('save', function () {
-  this.totalPrice = this.book.reduce(
-    (acc, curr) => acc + curr.price * curr.quantity,
+  this.book.reduce(
+    (acc, curr) => (curr.totalPrice = acc + curr.price * curr.quantity),
     0
   );
 });
-
+ 
 export default model<Cart>('Cart', cartSchema);
